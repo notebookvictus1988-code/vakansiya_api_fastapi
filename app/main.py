@@ -8,7 +8,7 @@ from app.routers import jobs
 
 app = FastAPI(
     title=settings.app_name,
-    description="Vakansiyalar va ishga arizalarni boshqarish uchun RESTful API.",
+    description="Vakansiyalar va ishga arizalarni boshqarish uchun RESTfully API.",
     version="1.0.0",
     docs_url="/docs",
     redoc_url="/redoc",
