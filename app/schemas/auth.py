@@ -1,5 +1,7 @@
-from pydantic import BaseModel, ConfigDict, EmailStr, Field, StringConstraints
 from typing import Annotated
+
+from pydantic import BaseModel, ConfigDict, EmailStr, Field, StringConstraints
+
 from app.models.user import UserRole
 
 Password = Annotated[str, StringConstraints(min_length=8, max_length=128)]

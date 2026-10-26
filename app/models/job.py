@@ -1,8 +1,21 @@
 import enum
 from datetime import datetime
-from sqlalchemy import CheckConstraint, DateTime, Enum, ForeignKey, Index, Integer, String, Text, func
+
+from sqlalchemy import (
+    CheckConstraint,
+    DateTime,
+    Enum,
+    ForeignKey,
+    Index,
+    Integer,
+    String,
+    Text,
+    func,
+)
 from sqlalchemy.orm import Mapped, mapped_column, relationship
+
 from app.db.session import Base
+
 
 class JobType(str, enum.Enum):
     full_time = "full_time"

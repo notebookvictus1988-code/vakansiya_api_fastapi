@@ -1,20 +1,26 @@
-from datetime import datetime, timezone
+from datetime import UTC, datetime
+
 from fastapi import APIRouter, Depends, HTTPException, Query, status
-from sqlalchemy import and_, or_, select, func
+from sqlalchemy import and_, func, or_, select
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session, joinedload
+
 from app.db.session import get_db
 from app.dependencies import require_roles
-from app.models.user import User, UserRole
-from app.models.job import Job, JobStatus, JobType
 from app.models.application import Application, ApplicationStatus
-from app.schemas.job import JobCreate, JobUpdate, JobOut
-from app.schemas.application import ApplicationCreate, ApplicationOut, EmployerApplicationOut
+from app.models.job import Job, JobStatus, JobType
+from app.models.user import User, UserRole
+from app.schemas.application import (
+    ApplicationCreate,
+    ApplicationOut,
+    EmployerApplicationOut,
+)
+from app.schemas.job import JobCreate, JobOut, JobUpdate
 
 router = APIRouter(prefix="/jobs", tags=["Jobs"])
 
 def utc_now():
-    return datetime.now(timezone.utc)
+    return datetime.now(UTC)
 
 def ensure_owner(job: Job, user: User):
     if job.employer_id != user.id:
@@ -120,7 +126,6 @@ def delete_job(job_id: int, db: Session = Depends(get_db),
     except IntegrityError:
         db.rollback()
         raise HTTPException(status_code=400, detail="Vakansiyani o'chirib bo'lmadi")
-    return None
 
 @router.post("/{job_id}/apply", response_model=ApplicationOut, status_code=status.HTTP_201_CREATED)
 def apply_to_job(job_id: int, payload: ApplicationCreate, db: Session = Depends(get_db),

@@ -1,12 +1,17 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy import select
 from sqlalchemy.orm import Session, joinedload
+
 from app.db.session import get_db
 from app.dependencies import require_roles
-from app.models.user import User, UserRole
-from app.models.job import Job
 from app.models.application import Application, ApplicationStatus
-from app.schemas.application import MyApplicationOut, ApplicationStatusUpdate, EmployerApplicationOut
+from app.models.job import Job
+from app.models.user import User, UserRole
+from app.schemas.application import (
+    ApplicationStatusUpdate,
+    EmployerApplicationOut,
+    MyApplicationOut,
+)
 
 router = APIRouter(prefix="/applications", tags=["Applications"])
 

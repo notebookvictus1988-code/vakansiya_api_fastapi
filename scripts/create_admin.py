@@ -1,8 +1,11 @@
 import argparse
+
 from sqlalchemy import select
-from app.db.session import SessionLocal
+
 from app.core.security import hash_password
+from app.db.session import SessionLocal
 from app.models.user import User, UserRole
+
 
 def main():
     parser = argparse.ArgumentParser(description="Create initial administrator")

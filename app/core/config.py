@@ -1,6 +1,7 @@
 from pydantic import field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
+
 class Settings(BaseSettings):
     app_name: str = "Vakansiyalar REST API"
     environment: str = "development"

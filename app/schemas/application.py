@@ -1,8 +1,11 @@
 from datetime import datetime
+
 from pydantic import BaseModel, ConfigDict, Field
+
 from app.models.application import ApplicationStatus
-from app.schemas.job import JobOut
 from app.schemas.auth import UserOut
+from app.schemas.job import JobOut
+
 
 class ApplicationCreate(BaseModel):
     cover_letter: str = Field(min_length=10, max_length=10000)

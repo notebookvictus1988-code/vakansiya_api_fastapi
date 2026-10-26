@@ -1,6 +1,9 @@
-from datetime import datetime, timezone
+from datetime import UTC, datetime
+
 from pydantic import BaseModel, ConfigDict, Field, model_validator
-from app.models.job import JobType, JobStatus
+
+from app.models.job import JobStatus, JobType
+
 
 class JobCreate(BaseModel):
     title: str = Field(min_length=2, max_length=200)
@@ -17,7 +20,7 @@ class JobCreate(BaseModel):
         if self.expires_at is not None:
             if self.expires_at.tzinfo is None:
                 raise ValueError("expires_at timezone bilan yuborilishi kerak")
-            if self.expires_at <= datetime.now(timezone.utc):
+            if self.expires_at <= datetime.now(UTC):
                 raise ValueError("expires_at kelajakdagi sana bo'lishi kerak")
         return self
 
@@ -34,7 +37,7 @@ class JobUpdate(BaseModel):
         if self.expires_at is not None:
             if self.expires_at.tzinfo is None:
                 raise ValueError("expires_at timezone bilan yuborilishi kerak")
-            if self.expires_at <= datetime.now(timezone.utc):
+            if self.expires_at <= datetime.now(UTC):
                 raise ValueError("expires_at kelajakdagi sana bo'lishi kerak")
         return self
 

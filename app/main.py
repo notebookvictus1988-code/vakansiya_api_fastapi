@@ -1,11 +1,8 @@
-from app.routers import applications
-from app.routers import auth
-from app.routers import admin
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+
 from app.core.config import settings
-from app.routers import jobs
-from app.routers import users
+from app.routers import admin, applications, auth, jobs, users
 
 app = FastAPI(
     title=settings.app_name,

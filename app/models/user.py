@@ -1,8 +1,11 @@
 import enum
 from datetime import datetime
+
 from sqlalchemy import DateTime, Enum, String, func
 from sqlalchemy.orm import Mapped, mapped_column, relationship
+
 from app.db.session import Base
+
 
 class UserRole(str, enum.Enum):
     candidate = "candidate"

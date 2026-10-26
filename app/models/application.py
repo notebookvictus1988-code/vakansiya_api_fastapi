@@ -1,8 +1,11 @@
 import enum
 from datetime import datetime
-from sqlalchemy import DateTime, Enum, ForeignKey, Text, UniqueConstraint, Index, func
+
+from sqlalchemy import DateTime, Enum, ForeignKey, Index, Text, UniqueConstraint, func
 from sqlalchemy.orm import Mapped, mapped_column, relationship
+
 from app.db.session import Base
+
 
 class ApplicationStatus(str, enum.Enum):
     submitted = "submitted"
